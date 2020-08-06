@@ -5,3 +5,4 @@ This repository is created with the aim of helping iMacros development easier us
 # CDN for libraries
 
 ## File.js
+https://cdn.jsdelivr.net/gh/access2content/iMacros-libraries/File/File.js
