@@ -1,27 +1,25 @@
 /**
  * Working with files in iMacros
  * @constructor
- * @param {string} folder  - The folder that contains the file
- * @param {string} file - Name of the file with extension
+ * @param {string} folder  - The complete path of the file
  */
 
-var IFile = function(folder,file)
+var IFile = function(path)
 {
-    /**@type {string} Complete Path of a folder. Set the {{!DATASOURCE}} by default*/
-    this.folder=folder?folder.replace(/ /g,"<SP>"):"{{!DATASOURCE}}";
-
-    /**@type {string} Name of the file with extension*/
-    this.file=file?file.replace(/ /g,"<SP>"):"";
+    /**New String Prototype function to add <SP> to strings */
+    String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
 
     /**@type {string} Path separator. \ for windows and / for other OS*/
     this.separator = window.navigator.oscpu.indexOf('Window')>=0?'\\':'/';
 
+    /**@type {string} Complete Path of a folder. Set the {{!DATASOURCE}} by default*/
+    this.folder=path?path.substring(0,path.lastIndexOf(this.separator)).addSP():"{{!DATASOURCE}}";
+
+    /**@type {string} Name of the file with extension*/
+    this.file=path?path.substring(path.lastIndexOf(this.separator)+1).addSP():"";
+
     /**@type {number} Variable that indicates the row number to be read in the file*/
     this.currentRow=1;
-
-    /**New String Prototype function to add <SP> to strings */
-    String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
-
 
 
 
