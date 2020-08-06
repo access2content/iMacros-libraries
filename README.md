@@ -18,5 +18,5 @@ Be sure to replace the "libraryURL" variable to the correct URL given below in t
 
 # CDN for libraries
 
-## File.js
+## [File.js](File)
 https://cdn.jsdelivr.net/gh/access2content/iMacros-libraries/File/File.js
