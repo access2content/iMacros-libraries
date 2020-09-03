@@ -1,13 +1,13 @@
-var DIV="DIV";
-var H1="H1";
-var BUTTON="BUTTON";
-var SPAN="SPAN";
-var A="A";
-var SELECT="SELECT";
-var INPUT="INPUT";
-var IMG="IMG";
+let DIV="DIV";
+let H1="H1";
+let BUTTON="BUTTON";
+let SPAN="SPAN";
+let A="A";
+let SELECT="SELECT";
+let INPUT="INPUT";
+let IMG="IMG";
 
-var iElement = function(element)
+let iElement = function(element)
 {
    	String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
 	this.pos=element.pos?element.pos:1;
@@ -100,7 +100,7 @@ var iElement = function(element)
 		iimPlayCode("SET !CLIPBOARD "+value+"\nEVENT TYPE=KEYPRESS SELECTOR=\""+this.type+"["+this.attr.replace(/<SP>/g," ")+"']\" CHAR=v MODIFIERS=\"ctrl\"");
 	};
 
-	this.type = (value) =>{
+	this.typeKeys = (value) =>{
 		value = value.replace(/\n/g,"\\n");
 iimPlayCode("EVENTS TYPE=KEYPRESS SELECTOR=\""+this.type+"["+this.attr.replace(":","='").replace(/<SP>/g," ")+"']\" CHARS=\""+value+"\"");
 	};
