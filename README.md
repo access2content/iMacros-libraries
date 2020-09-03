@@ -6,17 +6,18 @@ This repository is created with the aim of helping iMacros development easier us
 To use a library in your project, copy and paste the following code.  
 
 ```javascript
-var libraryURL="https://cdn.jsdelivr.net/gh/access2content/iMacros-libraries/File/File.js";
-
+function addLibrary(library)
+{
+var libraryURL="https://cdn.jsdelivr.net/gh/access2content/iMacros-libraries/"+library+"/"+library+".js";
 const XMLHttpRequest = Components.Constructor("@mozilla.org/xmlextras/xmlhttprequest;1");
 var getLibrary= XMLHttpRequest();
 getLibrary.open('GET',libraryURL,false);
 getLibrary.send();
 eval.apply(window,[getLibrary.response]);
+}
 ```
-Be sure to replace the "libraryURL" variable to the correct URL given below in the list.  
+Copy and paste the above function in the iMacros js file and specify the library to include in your script. Eg:-
 
-# CDN for libraries
-
-## [File.js](File)
-https://cdn.jsdelivr.net/gh/access2content/iMacros-libraries/File/File.js
+```javascript
+addLibrary("iElement");
+```
