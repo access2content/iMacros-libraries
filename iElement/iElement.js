@@ -1,13 +1,13 @@
-let DIV="DIV";
-let H1="H1";
-let BUTTON="BUTTON";
-let SPAN="SPAN";
-let A="A";
-let SELECT="SELECT";
-let INPUT="INPUT";
-let IMG="IMG";
+var DIV="DIV";
+var H1="H1";
+var BUTTON="BUTTON";
+var SPAN="SPAN";
+var A="A";
+var SELECT="SELECT";
+var INPUT="INPUT";
+var IMG="IMG";
 
-let iElement = function(element)
+var iElement = function(element)
 {
    	String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
 	this.pos=element.pos?element.pos:1;
