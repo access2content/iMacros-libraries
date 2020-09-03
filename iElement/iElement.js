@@ -48,7 +48,26 @@ var iElement = function(element)
 
 	this.clickEvent = () =>{
 		iimPlayCode("EVENT TYPE=CLICK SELECTOR=\""+this.type+"["+this.attr.replace(":","='").replace(/<SP>/g," ")+"']\" BUTTON=0");
-	}	
+	};
+	
+	this.getText = () =>{
+		let element = this.getAnchors();
+		iimPlayCode("SET !TIMEOUT_STEP 0\n"+element);
+		return iimGetLastExtract((element.match(/EXTRACT/g)||[]).length);
+	};
+
+	this.getLink = () =>{
+		let element = this.getElement()+" EXTRACT=HREF";
+		iimPlayCode("SET !TIMEOUT_STEP 0\n"+element);
+		return iimGetLastExtract((element.match(/EXTRACT/g)||[]).length);
+	};
+
+	this.getHtml = () =>{
+		let element = this.getElement()+" EXTRACT=HTM";
+		iimPlayCode("SET !TIMEOUT_STEP 0\n"+element);
+		return iimGetLastExtract((element.match(/EXTRACT/g)||[]).length);
+	};
+
 
 	this.getId = () =>{
 		let html = this.getHtml();
