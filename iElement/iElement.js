@@ -1,15 +1,15 @@
-const DIV="DIV";
-const H1="H1";
-const BUTTON="BUTTON";
-const SPAN="SPAN";
-const A="A";
-const SELECT="SELECT";
-const INPUT="INPUT";
-const IMG="IMG";
+var DIV="DIV";
+var H1="H1";
+var BUTTON="BUTTON";
+var SPAN="SPAN";
+var A="A";
+var SELECT="SELECT";
+var INPUT="INPUT";
+var IMG="IMG";
 
-let iElement = function(element)
+var iElement = function(element)
 {
-    String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
+   	String.prototype.addSP = new Function('return this.replace(/ /g,"<SP>");');
 	this.pos=element.pos?element.pos:1;
 	this.type=element.type?element.type:DIV;
 	this.attr=element.attr?element.attr.addSP().replace("=",":"):"*";
