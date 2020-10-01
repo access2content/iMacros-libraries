@@ -85,4 +85,13 @@ var IFile = function(path)
         }
         return false;
     };
+    
+    this.write = function(data)
+    {
+            code="CODE:";
+            for(let fileWriteloop=0;fileWriteloop<data.length;fileWriteloop++)
+                    code+="ADD !EXTRACT \""+data[fileWriteloop]+"\"\n";
+            code+="SAVEAS TYPE=EXTRACT FOLDER="+this.folder+" FILE="+this.file+"\n";
+            iimPlay(code);
+    };
 };
