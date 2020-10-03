@@ -108,7 +108,7 @@ var IFile = function(path)
 					this.code+="SET !DATASOURCE_LINE 1\n";
 					this.code+="SET !EXTRACT {{!COL"+mid+"}}\n";
 					
-					if(iimPlay(code)==-953)
+					if(iimPlay(this.code)==-953)
 							end=mid-1;
 					else
 							start=mid;
@@ -126,13 +126,13 @@ var IFile = function(path)
 		if(!rowNumber)
 			this.currentRow++,rowNumber=this.currentRow; 
 
-		code="CODE:SET !DATASOURCE "+this.folder+"\\"+this.file+"\n";
-		code+="SET !DATASOURCE_LINE "+rowNumber+"\n";
+		this.code="CODE:SET !DATASOURCE "+this.folder+"\\"+this.file+"\n";
+		this.code+="SET !DATASOURCE_LINE "+rowNumber+"\n";
 
 		for(var loop=1;loop<=this.totalColumns;loop++)
-			code+="ADD !EXTRACT {{!COL"+(loop)+"}}\n";
+			this.code+="ADD !EXTRACT {{!COL"+(loop)+"}}\n";
 		
-		if(iimPlay(code)<0)
+		if(iimPlay(this.code)<0)
 		{
 			iimPlayCode("WAIT SECONDS=0");
 				this.totalColumns=null;
