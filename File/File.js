@@ -21,7 +21,14 @@ var IFile = function(path)
     /**@type {number} Variable that indicates the row number to be read in the file*/
     this.currentRow=1;
 
+    /**@type {string} Variable that stores the code string for execution*/
+	this.code="";
 
+    /**@type {number} Variable that indicates the total rows in a file (Auto)*/
+	this.totalColumns=0;
+
+	/**@type {Array} An array to store all values read from a file*/
+	this.values=[]
 
     /**Sets the path of the folder replacing spaces with <SP>
      * @param {string} folder - Full path of the folder 
@@ -85,4 +92,56 @@ var IFile = function(path)
         }
         return false;
     };
+
+
+	this.getColSize = ()=>
+	{
+			let start=1;
+			let end=100;
+			let mid=0;
+			
+			while(start!=end)
+			{
+					mid = Math.ceil((start+end)/2);
+					this.code="CODE:";
+					this.code+="SET !DATASOURCE "+this.folder+"\\"+this.file+"\n";
+					this.code+="SET !DATASOURCE_LINE 1\n";
+					this.code+="SET !EXTRACT {{!COL"+mid+"}}\n";
+					
+					if(iimPlay(code)==-953)
+							end=mid-1;
+					else
+							start=mid;
+			}
+
+			iimPlayCode("WAIT SECONDS=0");
+			this.code=null;
+			this.totalColumns=start;
+	};
+
+
+	this.read = (rowNumber)=>{
+		if(this.totalColumns==null)
+			this.getColSize();	
+		if(!rowNumber)
+			this.currentRow++,rowNumber=this.currentRow; 
+
+		code="CODE:SET !DATASOURCE "+this.folder+"\\"+this.file+"\n";
+		code+="SET !DATASOURCE_LINE "+rowNumber+"\n";
+
+		for(var loop=1;loop<=this.totalColumns;loop++)
+			code+="ADD !EXTRACT {{!COL"+(loop)+"}}\n";
+		
+		if(iimPlay(code)<0)
+		{
+			iimPlayCode("WAIT SECONDS=0");
+				this.totalColumns=null;
+			return false;
+		}
+		
+		for(loop=1;loop<=this.totalColumns;loop++)
+			this.values[loop-1]=iimGetLastExtract(loop);
+		
+		return this.values.slice(0);
+	};
 };
