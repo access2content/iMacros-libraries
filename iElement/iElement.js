@@ -89,14 +89,14 @@ var iElement = function(element)
 	};
 
 	this.put= (value) =>{
-		value=value.addSP().replace(/\n/g,"<LF>");
+		value=value.toString().addSP().replace(/\n/g,"<LF>");
 		if(this.type==SELECT)
 			value="%"+value.replace(/;/g,":%");
 		iimPlayCode(this.getElement()+" CONTENT="+value);
 	};
 
 	this.paste = (value) =>{
-		value = value.addSP().replace(/\n/g,"<BR>");
+		value = value.toString().addSP().replace(/\n/g,"<BR>");
 		iimPlayCode("SET !CLIPBOARD "+value+"\nEVENT TYPE=KEYPRESS SELECTOR=\""+this.type+"["+this.attr.replace(/<SP>/g," ")+"']\" CHAR=v MODIFIERS=\"ctrl\"");
 	};
 
